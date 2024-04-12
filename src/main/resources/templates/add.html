@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Add product</h1>
+<form action="/products/add" method="post" th:object="${product}" enctype="multipart/form-data">
+<table border="1" cellspacing="5" cellpadding="10">
+    <tr>
+        <th><label >Product Name</label></th>
+        <td><input type="text" th:field="*{name}">
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></p></td>
+    </tr>
+    <tr>
+        <th><label >Product price</label></th>
+        <td><input type="text" th:field="*{price}" required min="0"></td>
+    </tr>
+    <tr>
+        <th><label >Product img</label></th>
+        <td><input type="file" name="file" id="product_image">
+            <img src="" alt="" id="preview" width="100" height="100" style="object-fit: cover"></td>
+    </tr>
+    <tr>
+        <th><label >Product stock</label></th>
+        <td><input type="text" th:field="*{stock}" required min="0" ></td>
+    </tr>
+    <tr>
+        <th><label >Product description</label></th>
+        <td><input type="text" th:field="*{description}"><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="submit" value="Add"></td>
+    </tr>
+</table>
+</form>
+<script>
+
+    const  inputImage = document.getElementById("product_image");
+    const  imagePreview = document.getElementById("preview");
+    inputImage.addEventListener("change",function (e){
+        if (e.target.files.length) {
+            const src = URL.createObjectURL(e.target.files[0])
+            imagePreview.src = src;
+        }
+    })
+</script>
+</body>
+</html>

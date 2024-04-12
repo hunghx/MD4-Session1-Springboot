@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Danh sach sp</h1>
+<a href="/products/add"> Them moi sp</a>
+<table border="10" cellpadding="10" cellspacing="10">
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>Sku</th>
+        <th>Name</th>
+        <th>Img</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Description</th>
+        <th colspan="2">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product,loop:${products}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${product.sku}"></td>
+        <td th:text="${product.name}"></td>
+        <td><img th:src="${product.img}" width="100" height="100" style="object-fit: cover" alt=""></td>
+        <td th:text="${product.getPriceFormat()}"></td>
+        <td th:text="${product.stock}"></td>
+        <td th:text="${product.description}"></td>
+        <td><a th:href="|/products/edit/${product.id}|">Edit</a></td>
+        <td><a th:href="|/products/delete/${product.id}|">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
